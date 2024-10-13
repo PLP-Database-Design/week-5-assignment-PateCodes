@@ -29,10 +29,6 @@ This demonstrates the cconnection of MySQL database and Node.js to create a simp
    // Question 1 goes here
    ## 1. Retrieve all patients
 
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
 // GET endpoint to retrieve all patients
 app.get('/patients', (req, res) => {
     db.query('SELECT * FROM patients', (err, results) => {
@@ -47,11 +43,7 @@ app.get('/patients', (req, res) => {
 
 
    // Question 2 goes here
-##Retrieve all providers
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
+   
 // GET endpoint to retrieve all providers
 app.get('/providers', (req, res) => {
     db.query('SELECT * FROM providers', (err, results) => {
@@ -69,11 +61,6 @@ app.get('/providers', (req, res) => {
 
    // Question 3 goes here
 ##Create a ```GET``` endpoint that retrieves all patients by their first name
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
-
 // Get Endpoint to Filter patients by First Name 
 app.get('/patients/first_name/:name', (req, res) => {
     const name = req.params.name; // Retrieve the name from the URL parameter
@@ -99,10 +86,6 @@ app.get('/patients/first_name/:name', (req, res) => {
 
    // Question 4 goes here
 ##Create a ```GET``` endpoint that retrieves all providers by their specialty
-
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
 
 // Get Endpoint to Retrieve Providers by Specialty
 app.get('/providers/specialty/:specialty', (req, res) => {
