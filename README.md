@@ -28,11 +28,6 @@ This demonstrates the cconnection of MySQL database and Node.js to create a simp
    
    // Question 1 goes here
    ## 1. Retrieve all patients
-Create a ```GET``` endpoint that retrieves all patients and displays their:
-- ```patient_id```
-- ```first_name```
-- ```last_name```
-- ```date_of_birth``
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -52,11 +47,7 @@ app.get('/patients', (req, res) => {
 
 
    // Question 2 goes here
-Retrieve all providers
-Create a ```GET``` endpoint that displays all providers with their:
-- ```first_name```
-- ```last_name```
-- ```provider_specialty```
+##Retrieve all providers
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -77,7 +68,7 @@ app.get('/providers', (req, res) => {
 
 
    // Question 3 goes here
-Create a ```GET``` endpoint that retrieves all patients by their first name
+##Create a ```GET``` endpoint that retrieves all patients by their first name
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -107,7 +98,7 @@ app.get('/patients/first_name/:name', (req, res) => {
 
 
    // Question 4 goes here
-Create a ```GET``` endpoint that retrieves all providers by their specialty
+##Create a ```GET``` endpoint that retrieves all providers by their specialty
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
