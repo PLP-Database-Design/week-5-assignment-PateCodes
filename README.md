@@ -27,15 +27,113 @@ This demonstrates the cconnection of MySQL database and Node.js to create a simp
 
    
    // Question 1 goes here
+   ## 1. Retrieve all patients
+Create a ```GET``` endpoint that retrieves all patients and displays their:
+- ```patient_id```
+- ```first_name```
+- ```last_name```
+- ```date_of_birth``
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+// GET endpoint to retrieve all patients
+app.get('/patients', (req, res) => {
+    db.query('SELECT * FROM patients', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving patients');
+        } else {
+            res.render('patients', { results: results });
+        }
+    });
+});
 
 
    // Question 2 goes here
+Retrieve all providers
+Create a ```GET``` endpoint that displays all providers with their:
+- ```first_name```
+- ```last_name```
+- ```provider_specialty```
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+// GET endpoint to retrieve all providers
+app.get('/providers', (req, res) => {
+    db.query('SELECT * FROM providers', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving providers');
+        } else {
+            console.log('Providers:', results); 
+            res.render('providers', { providers: results });
+        }
+    });
+});
+
 
 
    // Question 3 goes here
+Create a ```GET``` endpoint that retrieves all patients by their first name
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+
+// Get Endpoint to Filter patients by First Name 
+app.get('/patients/first_name/:name', (req, res) => {
+    const name = req.params.name; // Retrieve the name from the URL parameter
+    console.log('Filtering patients by first name:', name); // Log the name
+
+    const sql = 'SELECT * FROM patients WHERE first_name = ?'; // SQL query to filter patients
+
+    db.query(sql, [name], (err, results) => {
+        if (err) {
+            console.error('Database query error:', err); // Log the error
+            return res.status(500).json({ error: 'Database query error' });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send(`No patients found with the first name: ${name}`);
+        }
+
+        // Render the results using the filteredPatients.ejs view
+        res.render('filteredPatients', { patients: results }); // Pass the results to the view
+    });
+});
 
 
    // Question 4 goes here
+Create a ```GET``` endpoint that retrieves all providers by their specialty
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+// Get Endpoint to Retrieve Providers by Specialty
+app.get('/providers/specialty/:specialty', (req, res) => {
+    const specialty = req.params.specialty; // Retrieve the specialty from the URL parameter
+    console.log('Filtering providers by specialty:', specialty); // Log the specialty
+
+    const sql = 'SELECT * FROM providers WHERE provider_specialty = ?'; // Updated SQL query
+
+    db.query(sql, [specialty], (err, results) => {
+        if (err) {
+            console.error('Database query error:', err.sqlMessage || err); // Log the error
+            return res.status(500).json({ error: 'Database query error' });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send(`No providers found with the specialty: ${specialty}`);
+        }
+
+        // Render the results using the filteredProviders.ejs view
+        res.render('filteredProviders', { providers: results }); // Pass the results to the view
+    });
+});
 
    
 
